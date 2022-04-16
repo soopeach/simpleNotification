@@ -27,16 +27,14 @@ class MainActivity : AppCompatActivity() {
         binding.btn.setOnClickListener {
             val title = binding.title.text.toString()
             val content = binding.content.text.toString()
-
             if (title.isNotEmpty() && content.isNotEmpty()) {
 
                 val notificationManager =
                     getSystemService(NOTIFICATION_SERVICE) as NotificationManager
-                notificationManager.notify(2, buildNotification(title, content))
+                notificationManager.notify(1, buildNotification(title, content))
             } else {
                 Toast.makeText(this, "제목과 내용을 입력해주세요.", Toast.LENGTH_SHORT).show()
             }
-
 
         }
 
