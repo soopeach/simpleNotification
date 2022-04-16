@@ -3,6 +3,7 @@ package com.example.notification
 import android.app.Notification
 import android.app.NotificationChannel
 import android.app.NotificationManager
+import android.content.Context
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -12,7 +13,7 @@ import com.example.notification.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 
-    val CHANNEL_ID = "10001"
+    val CHANNEL_ID = "10000"
     val CHANNEL_NAME = "Soopeach Channel"
 
     val binding by lazy { ActivityMainBinding.inflate(layoutInflater) }
@@ -31,7 +32,7 @@ class MainActivity : AppCompatActivity() {
 
                 val notificationManager =
                     getSystemService(NOTIFICATION_SERVICE) as NotificationManager
-                notificationManager.notify(1, buildNotification(title, content))
+                notificationManager.notify(2, buildNotification(title, content))
             } else {
                 Toast.makeText(this, "제목과 내용을 입력해주세요.", Toast.LENGTH_SHORT).show()
             }
@@ -75,6 +76,18 @@ class MainActivity : AppCompatActivity() {
         }
 
 
+    }
+
+    fun deleteChannel() {
+        val manager = getSystemService(NotificationManager::class.java)
+        manager.deleteNotificationChannel("CHANNEL_ID")
+    }
+
+    fun modifyChannel(channelID: String){
+        val manager = getSystemService(NotificationManager::class.java)
+        val channel = manager.getNotificationChannel(channelID)
+        channel.name = "수정된 채널 이름"
+        manager.createNotificationChannel(channel)
     }
 
 }
