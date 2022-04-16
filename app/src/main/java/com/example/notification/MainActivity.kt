@@ -29,20 +29,19 @@ class MainActivity : AppCompatActivity() {
 
             if (title.isNotEmpty() && content.isNotEmpty()) {
 
-                val notificationManager = getSystemService(NOTIFICATION_SERVICE) as NotificationManager
+                val notificationManager =
+                    getSystemService(NOTIFICATION_SERVICE) as NotificationManager
                 notificationManager.notify(1, buildNotification(title, content))
-            }else {
+            } else {
                 Toast.makeText(this, "제목과 내용을 입력해주세요.", Toast.LENGTH_SHORT).show()
             }
 
-
         }
-
 
     }
 
     // 알림 채널 생성
-    fun createNotificationChannel(){
+    fun createNotificationChannel() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val channel = NotificationChannel(
                 CHANNEL_ID,
@@ -54,8 +53,8 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    fun buildNotification(title : String, content : String) : Notification {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+    fun buildNotification(title: String, content: String): Notification {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val builder = NotificationCompat.Builder(this, CHANNEL_ID)
                 .setContentTitle(title)
                 .setContentText(content)
@@ -72,7 +71,6 @@ class MainActivity : AppCompatActivity() {
                 .build()
             return builder
         }
-
 
     }
 
