@@ -36,7 +36,9 @@ class MainActivity : AppCompatActivity() {
                 Toast.makeText(this, "제목과 내용을 입력해주세요.", Toast.LENGTH_SHORT).show()
             }
 
+
         }
+
 
     }
 
@@ -47,7 +49,7 @@ class MainActivity : AppCompatActivity() {
                 CHANNEL_ID,
                 CHANNEL_NAME,
                 NotificationManager.IMPORTANCE_DEFAULT
-            ).apply { description = "수피치 알림" }
+            )
             val manager = getSystemService(NotificationManager::class.java)
             manager.createNotificationChannel(channel)
         }
@@ -71,6 +73,7 @@ class MainActivity : AppCompatActivity() {
                 .build()
             return builder
         }
+
 
     }
 
