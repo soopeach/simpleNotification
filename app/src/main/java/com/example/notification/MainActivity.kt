@@ -20,16 +20,8 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-        // 알림 생성
-//        val builder = NotificationCompat.Builder(this, CHANNEL_ID)
-//            .setContentTitle("수피치의 알림")
-//            .setContentText("알림이 왔습니다. - 수피치 -")
-//            .setSmallIcon(R.drawable.ic_launcher_foreground)
-//            .setPriority(NotificationCompat.PRIORITY_DEFAULT)
-//            .build()
 
         createNotificationChannel()
-
 
         binding.btn.setOnClickListener {
             val title = binding.title.text.toString()
@@ -51,7 +43,6 @@ class MainActivity : AppCompatActivity() {
 
     // 알림 채널 생성
     fun createNotificationChannel(){
-
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val channel = NotificationChannel(
                 CHANNEL_ID,
@@ -64,13 +55,25 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun buildNotification(title : String, content : String) : Notification {
-        val builder = NotificationCompat.Builder(this, CHANNEL_ID)
-            .setContentTitle(title)
-            .setContentText(content)
-            .setSmallIcon(R.drawable.ic_launcher_foreground)
-            .setPriority(NotificationCompat.PRIORITY_DEFAULT)
-            .build()
-        return builder
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+            val builder = NotificationCompat.Builder(this, CHANNEL_ID)
+                .setContentTitle(title)
+                .setContentText(content)
+                .setSmallIcon(R.drawable.ic_launcher_foreground)
+                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                .build()
+            return builder
+        } else {
+            val builder = NotificationCompat.Builder(this)
+                .setContentTitle(title)
+                .setContentText(content)
+                .setSmallIcon(R.drawable.ic_launcher_foreground)
+                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                .build()
+            return builder
+        }
+
+
     }
 
 }
